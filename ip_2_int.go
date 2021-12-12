@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	var valu int32
+	var valu int64
 	var ip_ string
 	fmt.Print("Enter the ip address:")
 	fmt.Scan(&ip_)
@@ -16,7 +16,7 @@ func main() {
 	l_swift := []int{24, 16, 8, 0}
 	for i := 0; len(bits) > i; i++ {
 		a, _ := strconv.Atoi(bits[i])
-		valu += int32(a << l_swift[i])
+		valu += int64(a << l_swift[i])
 	}
 	fmt.Print(valu)
 }
