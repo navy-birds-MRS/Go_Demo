@@ -5,7 +5,7 @@ import (
 	"math"
 )
 
-func main() {
+func EMI() {
 	var LoanAmount int
 	var interest_rate float64
 	var how_many_months int
