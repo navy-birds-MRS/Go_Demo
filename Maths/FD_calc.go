@@ -1,4 +1,4 @@
-package main
+package Math
 
 import "fmt"
 
@@ -6,7 +6,7 @@ func f32(val int) float32 {
 	return float32(val)
 }
 
-func main() {
+func Fd_calc() {
 	var Investment_amount float32
 	var percentage, SCDS_sum, TDS_sum float32
 	var days, years int
