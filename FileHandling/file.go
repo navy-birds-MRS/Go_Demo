@@ -1,5 +1,5 @@
 // package filewrite
-package main
+package file
 
 import (
 	"bufio"
@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func main() {
+func File() {
 	FileName := "example.txt"
 	_, err := os.Stat("example.txt")
 	if err != nil {
