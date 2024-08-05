@@ -27,7 +27,6 @@ func EncryptByAes(data []byte) (a string, b string, err error) {
 	Hashedkey := sha256.Sum256(key)
 
 	// Create a new AES cipher
-	fmt.Println(Hashedkey)
 	block, err := aes.NewCipher([]byte(Hashedkey[:]))
 	if err != nil {
 		return "", "", err
@@ -41,14 +40,12 @@ func EncryptByAes(data []byte) (a string, b string, err error) {
 
 	// Create a nonce
 	nonce := make([]byte, gcm.NonceSize())
-	fmt.Println("nonce size :",nonce)
 	if _, err = io.ReadFull(rand.Reader, nonce); err != nil {
 		return "", "", err
 	}
 
 	// Encrypt the data
 	ciphertext := gcm.Seal(nonce, nonce, data, nil)
-	fmt.Println(ciphertext)
 
 	// Return the encrypted data as a base64 encoded string
 	return base64.StdEncoding.EncodeToString(ciphertext), base64.StdEncoding.EncodeToString(Hashedkey[:]), nil
