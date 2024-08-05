@@ -10,10 +10,6 @@ import (
 	"io"
 )
 
-// func encryptAes1(data []byte) (a string, b string, err error) {
-	
-// }
-
 func EncryptByAes(data []byte) (a string, b string, err error) {
 	// Generate a random key
 	key := make([]byte, sha256.Size)
