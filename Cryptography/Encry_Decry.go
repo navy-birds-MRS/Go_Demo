@@ -1,4 +1,3 @@
-//package Aes_crypt
 package Aes_crypt
 
 import (
