@@ -1,42 +1,42 @@
-// package filewrite
 package file
 
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 )
 
-func File() {
-	FileName := "example.txt"
-	_, err := os.Stat("example.txt")
+func FileCreation(filename string) error {
+	_, err := os.Stat(filename)
 	if err != nil {
 		if os.IsNotExist(err) {
 			fmt.Println("File does not exist")
 			fmt.Print("Would you like to create? -> yes or no :")
-			var File_creation_input string
-			fmt.Scanln(&File_creation_input)
-			if File_creation_input[0] == 'y' {
-				Fc, err := os.OpenFile(FileName, os.O_CREATE, 0600)
+			var createInput string
+			fmt.Scanln(&createInput)
+			if createInput[0] == 'y' {
+				file, err := os.OpenFile(filename, os.O_CREATE|os.O_APPEND, 0600)
 				if err != nil {
-					log.Fatal(err)
+					return err
 				}
-				Fc.Close()
-				//defer file.Close()
+				defer file.Close()
 			} else {
-				return
+				return nil
 			}
 		} else {
-			log.Fatal(err)
+			return err
 		}
 	}
-	file, err := os.OpenFile(FileName, os.O_APPEND, 0600)
+
+	file, err := os.OpenFile(filename, os.O_APPEND, 0600)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer file.Close()
+
 	writer := bufio.NewWriter(file)
 	defer writer.Flush()
-	fmt.Fprintln(writer, "first fill we have writed succesfully 123")
+
+	fmt.Fprintln(writer, "first fill we have writed successfully 123")
+	return nil
 }
