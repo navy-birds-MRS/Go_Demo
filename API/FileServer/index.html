@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Image</h1>
+        <form id="upload-form" enctype="multipart/form-data">
+            <input type="file" id="image" name="image" accept="image/*">
+            <button type="submit">Upload Image</button>
+            <div id="response"></div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        const responseDiv = document.getElementById('response');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const url = 'http://192.168.1.4:8080/upload';
+
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                responseDiv.innerHTML = `Image uploaded successfully! <br> ID: ${data.id} <br> Name: ${data.name} <br> Uploaded At: ${data.uploadedAt}`;
+            })
+            .catch((err) => {
+                responseDiv.innerHTML = 'Error uploading image: ' + err.message;
+            });
+        });
+    </script>
+</body>
+</html>
